@@ -34,7 +34,8 @@ export const products: ProductType[] = [
     description:
       "An adjustable ergonomic chair designed for comfort during long working hours.",
     price: 8999,
-    image: "https://images.unsplash.com/photo-1505843490701-5be5d1b5e823",
+    image:
+      "https://images.unsplash.com/photo-1683836809851-9e3aad661ffd?q=80&w=1161&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
     quantity: 1,
   },
   {
