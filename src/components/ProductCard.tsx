@@ -6,26 +6,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import type { ProductType } from "@/types/productType";
 import { ShoppingCart } from "lucide-react";
 
-const ProductCard = () => {
+interface ProductCardProps {
+  product: ProductType;
+}
+
+const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <Card className="max-w-sm pt-0 m-10">
+    <Card className="w-full pt-0">
       <div className="rounded-b-none overflow-hidden w-full">
         <img
           className="w-full aspect-video object-cover hover:scale-[1.05] transition-all duration-300 ease-in-out"
-          src="https://images.unsplash.com/photo-1512212621149-107ffe572d2f?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
-          alt="sofa"
+          src={product.image}
+          alt={product.name}
         />
       </div>
 
       <CardHeader>
-        <CardTitle>Sofa</CardTitle>
+        <CardTitle>{product.name}</CardTitle>
         <CardDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magni
-          adipisci nisi...
+          {product?.description.length <= 77
+            ? product.description
+            : product.description.slice(0, 77)}
         </CardDescription>
-        <div className="mt-2 font-bold text-foreground">25000 Rs</div>
+        <div className="mt-2 font-bold text-foreground">{product.price} Rs</div>
       </CardHeader>
 
       <CardFooter>
