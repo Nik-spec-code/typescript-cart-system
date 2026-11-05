@@ -21,6 +21,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
           className="w-full aspect-video object-cover hover:scale-[1.05] transition-all duration-300 ease-in-out"
           src={product.image}
           alt={product.name}
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
