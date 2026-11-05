@@ -1,15 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/context/useTheme";
 import { Moon, Sun } from "lucide-react";
-import { useState } from "react";
 
 const ToggleTheme = () => {
-  const [theme, setTheme] = useState<string>("light");
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <Button
-      className="bg-transparent"
-      onClick={() => setTheme((prev) => (prev === "light" ? "dark" : "light"))}
-    >
+    <Button className="bg-transparent" onClick={toggleTheme}>
       {theme === "dark" ? (
         <Moon className="size-5.75" strokeWidth={3} />
       ) : (
