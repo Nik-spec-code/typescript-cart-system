@@ -1,7 +1,9 @@
+import CartProductGrid from "@/components/CartProductGrid";
+
 const Cart = () => {
   return (
-    <div>Cart</div>
-  )
-}
+    <CartProductGrid />
+  );
+};
 
-export default Cart
+export default Cart;
