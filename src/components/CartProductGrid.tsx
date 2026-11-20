@@ -2,21 +2,23 @@ import CartItem from "@/components/CartItem";
 import { Button } from "@/components/ui/button";
 import { ItemGroup } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
-import { products } from "@/dummy_data/productList";
+import { useCart } from "@/context/useCart";
 import { ArrowRight } from "lucide-react";
 
 const CartProductGrid = () => {
+  const { cart } = useCart();
+
   return (
     <section className="relative bg-background w-full px-14 py-8 grid grid-cols-4">
       {/* Cart Product List */}
-      <div className="px-4 pt-3 pb-6 mr-10 col-span-3 rounded-lg border-[0.1px] border-border">
+      <div className="h-fit px-4 pt-3 pb-6 mr-10 col-span-3 rounded-lg border-[0.1px] border-border">
         <h2 className="text-xl text-foreground mb-5 font-semibold">
           Cart Products
         </h2>
 
         {/* Items Container */}
         <ItemGroup className="gap-4">
-          {products.map((product) => (
+          {cart.map((product) => (
             <CartItem key={product.id} product={product} />
           ))}
         </ItemGroup>
