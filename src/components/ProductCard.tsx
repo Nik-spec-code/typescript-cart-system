@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useCart } from "@/context/useCart";
 import type { ProductType } from "@/types/productType";
 import { ShoppingCart } from "lucide-react";
 
@@ -14,6 +15,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const {addToCart} = useCart();
+
   return (
     <Card className="w-full pt-0">
       <div className="rounded-b-none overflow-hidden w-full">
@@ -37,7 +40,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </CardHeader>
 
       <CardFooter>
-        <Button className="w-full">
+        <Button onClick={() => addToCart(product.id)} className="w-full">
           <ShoppingCart className="mr-2" strokeWidth={3} /> Add To Cart
         </Button>
       </CardFooter>
