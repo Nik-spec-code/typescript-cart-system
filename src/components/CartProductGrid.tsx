@@ -7,6 +7,12 @@ import { ArrowRight } from "lucide-react";
 
 const CartProductGrid = () => {
   const { cart } = useCart();
+  const deliveryFee = 500;
+
+  const subtotal: number = cart.reduce(
+    (acc, prod) => acc + prod.price * prod.quantity,
+    0,
+  );
 
   return (
     <section className="relative bg-background w-full px-14 py-8 grid grid-cols-4">
@@ -34,7 +40,7 @@ const CartProductGrid = () => {
         <ul className="space-y-4 mb-4">
           <li className="flex items-center justify-between text-sm">
             <h4>Subtotal</h4>
-            <span>575 Rs</span>
+            <span>{subtotal} Rs</span>
           </li>
           <li className="flex items-center justify-between text-sm">
             <h4>Discount</h4>
@@ -42,7 +48,7 @@ const CartProductGrid = () => {
           </li>
           <li className="flex items-center justify-between text-sm">
             <h4>Delivery Fee</h4>
-            <span>40 Rs</span>
+            <span>{deliveryFee} Rs</span>
           </li>
         </ul>
 
@@ -51,7 +57,7 @@ const CartProductGrid = () => {
         {/* Total Amount */}
         <div className="flex items-center justify-between mb-10">
           <h4>Total</h4>
-          <span className="text-lg">615 Rs</span>
+          <span className="text-lg">{subtotal + deliveryFee} Rs</span>
         </div>
 
         <Button className="w-full py-6 rounded-full">
