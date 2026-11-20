@@ -7,12 +7,15 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { Trash } from "lucide-react";
+import { useCart } from "@/context/useCart";
 
 interface CartItemProps {
   product: ProductType;
 }
 
 const CartItem = ({ product }: CartItemProps) => {
+  const { removeFromCart } = useCart();
+
   return (
     <Item
       className="items-stretch"
@@ -41,6 +44,7 @@ const CartItem = ({ product }: CartItemProps) => {
 
       <ItemContent className="justify-between items-end">
         <Trash
+          onClick={() => removeFromCart(product.id)}
           className="cursor-pointer size-5.5 text-destructive"
           strokeWidth={2.5}
         />
