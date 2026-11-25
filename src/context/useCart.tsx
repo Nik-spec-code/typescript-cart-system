@@ -1,6 +1,7 @@
 import type { ProductType } from "@/types/productType";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { products } from "@/dummy_data/productList";
+import { toast } from "sonner";
 
 interface CartContextProviderProps {
   children: React.ReactNode;
@@ -41,8 +42,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
               : { ...prod, quantity: prod.quantity + 1 },
           ),
         );
+        toast.info("Updated item quantity in cart", {
+          position: "bottom-right",
+        });
       } else {
         setCart((prevCart) => [...prevCart, product]);
+        toast.success("Added to your cart", { position: "bottom-right" });
       }
     }
   }
