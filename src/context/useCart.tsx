@@ -42,12 +42,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
               : { ...prod, quantity: prod.quantity + 1 },
           ),
         );
-        toast.info("Updated item quantity in cart", {
-          position: "bottom-right",
-        });
+        toast.info("Updated item quantity in cart");
       } else {
         setCart((prevCart) => [...prevCart, product]);
-        toast.success("Added to your cart", { position: "bottom-right" });
+        toast.success("Added to your cart");
       }
     }
   }
@@ -55,6 +53,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   // Remove From Cart
   function removeFromCart(id: string): void {
     setCart((prevCart) => prevCart.filter((prod) => prod.id !== id));
+    toast.error("Removed from your cart");
   }
 
   // Increase Quantity
