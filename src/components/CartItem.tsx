@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/item";
 import { Trash } from "lucide-react";
 import { useCart } from "@/context/useCart";
+import QtyControlBtn from "@/components/QtyControlBtn";
 
 interface CartItemProps {
   product: ProductType;
@@ -39,7 +40,7 @@ const CartItem = ({ product }: CartItemProps) => {
           </ItemDescription>
         </div>
 
-        <div>Inc/Dec</div>
+        <QtyControlBtn product={product} />
       </ItemContent>
 
       <ItemContent className="justify-between items-end">
