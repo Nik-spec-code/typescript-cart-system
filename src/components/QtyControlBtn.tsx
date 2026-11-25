@@ -12,9 +12,8 @@ const QtyControlBtn = ({ product }: QtyControlBtnProps) => {
   return (
     <div className="flex items-center">
       <Button
-        onClick={() => decreaseQuantity(product.id)}
-        disabled={product.quantity <= 1}
-        className="rounded-l-full text-base active:scale-95 active:transition-transform active:duration-0"
+        onClick={() => decreaseQuantity(product.id, product.quantity)}
+        className={`rounded-l-full text-base active:scale-95 active:transition-transform active:duration-0 ${product.quantity <= 1 && "opacity-50"}`}
         size={"sm"}
       >
         -

@@ -12,7 +12,7 @@ interface CartContextType {
   addToCart: (id: string) => void;
   removeFromCart: (id: string) => void;
   increaseQuantity: (id: string) => void;
-  decreaseQuantity: (id: string) => void;
+  decreaseQuantity: (id: string, quantity: number) => void;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -66,14 +66,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   // Decrease Quantity
-  function decreaseQuantity(id: string): void {
-    setCart((prevCart) =>
-      prevCart.map((prod) =>
-        prod.id !== id
-          ? prod
-          : { ...prod, quantity: prod.quantity <= 1 ? 1 : prod.quantity - 1 },
-      ),
-    );
+  function decreaseQuantity(id: string, quantity: number): void {
+    if (quantity <= 1) {
+      toast.info("Quantity cannot be less than 1");
+    } else {
+      setCart((prevCart) =>
+        prevCart.map((prod) =>
+          prod.id !== id ? prod : { ...prod, quantity: prod.quantity - 1 },
+        ),
+      );
+    }
   }
 
   useEffect(() => {
