@@ -1,6 +1,7 @@
 import type { ProductType } from "@/types/productType";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { products } from "@/dummy_data/productList";
+import { toast } from "sonner";
 
 interface CartContextProviderProps {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ interface CartContextType {
   addToCart: (id: string) => void;
   removeFromCart: (id: string) => void;
   increaseQuantity: (id: string) => void;
-  decreaseQuantity: (id: string) => void;
+  decreaseQuantity: (id: string, quantity: number) => void;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -41,8 +42,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
               : { ...prod, quantity: prod.quantity + 1 },
           ),
         );
+        toast.info("Updated item quantity in cart");
       } else {
         setCart((prevCart) => [...prevCart, product]);
+        toast.success("Added to your cart");
       }
     }
   }
@@ -50,6 +53,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   // Remove From Cart
   function removeFromCart(id: string): void {
     setCart((prevCart) => prevCart.filter((prod) => prod.id !== id));
+    toast.error("Removed from your cart");
   }
 
   // Increase Quantity
@@ -62,14 +66,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   // Decrease Quantity
-  function decreaseQuantity(id: string): void {
-    setCart((prevCart) =>
-      prevCart.map((prod) =>
-        prod.id !== id
-          ? prod
-          : { ...prod, quantity: prod.quantity <= 1 ? 1 : prod.quantity - 1 },
-      ),
-    );
+  function decreaseQuantity(id: string, quantity: number): void {
+    if (quantity <= 1) {
+      toast.info("Quantity cannot be less than 1");
+    } else {
+      setCart((prevCart) =>
+        prevCart.map((prod) =>
+          prod.id !== id ? prod : { ...prod, quantity: prod.quantity - 1 },
+        ),
+      );
+    }
   }
 
   useEffect(() => {
